@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "798581604048",
+    "firebase_url": "https://broc-9a915.firebaseio.com",
+    "project_id": "broc-9a915",
+    "storage_bucket": "broc-9a915.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798581604048:android:464014594c9a753a",
+        "android_client_info": {
+          "package_name": "clement.broc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798581604048-2qg3rno6re7ma0lt2ko17u7tg7d9jjeg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAf_aHOQ4XLOlo2An1vDBKZq0YTWZBGuE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
