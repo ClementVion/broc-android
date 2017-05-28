@@ -1,5 +1,6 @@
 package clement.broc;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,8 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NavActivity extends AppCompatActivity {
 
@@ -36,10 +40,14 @@ public class NavActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,11 +79,20 @@ public class NavActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+          //  return true;
+        //}
 
-        return super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+            case R.id.action_logout:
+                firebaseAuth.signOut();
+                finish();
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
+        }
+        return true;
+
+        //return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -135,6 +152,9 @@ public class NavActivity extends AppCompatActivity {
                 case 2:
                     Tab3 tab3 = new Tab3();
                     return tab3;
+                case 3:
+                    Tab4 tab4 = new Tab4();
+                    return tab4;
             }
             return null;
         }
