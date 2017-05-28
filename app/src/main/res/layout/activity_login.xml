@@ -23,7 +23,8 @@
             android:layout_centerVertical="true"
             android:layout_margin="15dp"
             android:textSize="24dp"
-            android:text="User Login"
+            android:text="Se connecter"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3" />
@@ -31,7 +32,7 @@
         <EditText
             android:layout_margin="15dp"
             android:inputType="textEmailAddress"
-            android:hint="Enter your email"
+            android:hint="Email"
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -39,7 +40,7 @@
         <EditText
             android:layout_margin="15dp"
             android:inputType="textPassword"
-            android:hint="Enter your password"
+            android:hint="Mot de passe"
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -47,13 +48,16 @@
         <Button
             android:layout_margin="15dp"
             android:id="@+id/buttonSignIn"
-            android:text="Sign in"
+            android:text="Connexion"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium" />
 
         <TextView
             android:textAlignment="center"
-            android:text="Not have an acount ? Signup here"
+            android:text="Pas de compte ? Inscrivez-vous ici"
             android:id="@+id/textViewSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()){
                             //start profile activity here
                             finish();
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            startActivity(new Intent(getApplicationContext(), NavActivity.class));
                         }else{
                             Toast.makeText(MainActivity.this, "Could not register.. please try again", Toast.LENGTH_SHORT).show();
                         }
