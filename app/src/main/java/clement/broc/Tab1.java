@@ -9,6 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +31,16 @@ public class Tab1 extends Fragment {
 
     private List<ListItem> listItems;
 
+    DatabaseReference databaseEvents;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1, container, false);
         rootView.setTag(TAG);
+
+        databaseEvents = FirebaseDatabase.getInstance().getReference("events");
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -37,14 +48,45 @@ public class Tab1 extends Fragment {
 
         listItems = new ArrayList<>();
 
-        for(int i = 0; i<=10; i++){
+        /*for(int i = 0; i<=10; i++){
             ListItem listItem = new ListItem(
                     "heading" + (i+1),
                     "Lorem ipsum coucou"
             );
 
             listItems.add(listItem);
-        }
+        }*/
+
+        databaseEvents.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listItems.clear();
+
+                for(DataSnapshot eventSnapshot : dataSnapshot.getChildren()){
+                    EventInformation event = eventSnapshot.getValue(EventInformation.class);
+                    //System.out.println(event.getName() + " - " + event.getAddress());
+
+                    ListItem listItem = new ListItem(
+                            event.getName(),
+                            event.getAddress()
+                    );
+
+                    listItems.add(listItem);
+                }
+
+                adapter = new MyAdapter(listItems, getActivity());
+
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         adapter = new MyAdapter(listItems, getActivity());
 

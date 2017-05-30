@@ -56,6 +56,9 @@ public class Tab4 extends Fragment implements View.OnClickListener {
         postReference.setValue(eventInformation);
 
         Toast.makeText(getActivity(), "Evènement enregistré", Toast.LENGTH_LONG).show();
+
+        editTextEventName.getText().clear();
+        editTextEventAddress.getText().clear();
     }
 
 
