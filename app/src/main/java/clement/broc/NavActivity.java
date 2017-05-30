@@ -164,7 +164,7 @@ public class NavActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "ACCUEIL";
+                    return "BROC'S";
                 case 1:
                     return "FAVORIS";
                 case 2:

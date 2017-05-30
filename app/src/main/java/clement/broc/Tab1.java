@@ -57,6 +57,7 @@ public class Tab1 extends Fragment {
             listItems.add(listItem);
         }*/
 
+        // Retrieve data from Firebase
         databaseEvents.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,10 +67,12 @@ public class Tab1 extends Fragment {
                 for(DataSnapshot eventSnapshot : dataSnapshot.getChildren()){
                     EventInformation event = eventSnapshot.getValue(EventInformation.class);
                     //System.out.println(event.getName() + " - " + event.getAddress());
+                    //System.out.println("Id : " + eventSnapshot.getKey());
 
                     ListItem listItem = new ListItem(
                             event.getName(),
-                            event.getAddress()
+                            event.getAddress(),
+                            eventSnapshot.getKey()
                     );
 
                     listItems.add(listItem);
@@ -78,12 +81,11 @@ public class Tab1 extends Fragment {
                 adapter = new MyAdapter(listItems, getActivity());
 
                 recyclerView.setAdapter(adapter);
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                System.out.println("The read failed: " + databaseError.getCode());
             }
         });
 
