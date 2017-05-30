@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
         
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:padding="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
             android:layout_width="match_parent"
