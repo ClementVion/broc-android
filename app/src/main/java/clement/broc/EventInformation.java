@@ -8,14 +8,16 @@ public class EventInformation {
 
     public String name;
     public String address;
+    public String imageUrl;
 
     public EventInformation() {
 
     }
 
-    public EventInformation(String name, String address) {
+    public EventInformation(String name, String address, String imageUrl) {
         this.name = name;
         this.address = address;
+        this.imageUrl = imageUrl;
     }
 
     public String getAddress() {
@@ -24,5 +26,9 @@ public class EventInformation {
 
     public String getName() {
         return name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

@@ -21,11 +21,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 import static com.google.android.gms.internal.zzs.TAG;
@@ -73,11 +73,14 @@ public class Tab4 extends Fragment implements View.OnClickListener {
     }
 
 
-    public void addEvent() {
+    public void addEvent(Uri imageUrl) {
         String name = editTextEventName.getText().toString().trim();
         String address = editTextEventAddress.getText().toString().trim();
 
-        EventInformation eventInformation = new EventInformation(name, address);
+        String imageUrlString;
+        imageUrlString = imageUrl.toString();
+
+        EventInformation eventInformation = new EventInformation(name, address, imageUrlString);
 
         DatabaseReference postReference = databaseReference.child("events").push();
 
@@ -97,13 +100,17 @@ public class Tab4 extends Fragment implements View.OnClickListener {
             //progressDialog.setTitle("Uploading...");
             //progressDialog.show();
 
-            StorageReference riversRef = storageReference.child("images/event_image.jpg");
+            StorageReference riversRef = storageReference.child("images/event_" + UUID.randomUUID().toString() + ".jpg");
 
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // Toast.makeText(getActivity().getApplicationContext(), "Image enregistrée", Toast.LENGTH_LONG).show();
+
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+                            addEvent(downloadUrl);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -111,17 +118,9 @@ public class Tab4 extends Fragment implements View.OnClickListener {
                         public void onFailure(@NonNull Exception exception) {
                             //Toast.makeText(getActivity().getApplicationContext(), "Problème durant l'enregistrement de l'image", Toast.LENGTH_LONG).show();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0* taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                            //progressDialog.setMessage(((int) progress) + "% uploaded");
-                        }
                     });
-            ;
         }else {
-            // Display error Toast
+            // Display error Toast or direcly launch addEvent()
         }
     }
 
