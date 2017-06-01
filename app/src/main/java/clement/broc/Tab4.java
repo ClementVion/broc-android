@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,8 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
@@ -40,6 +47,8 @@ public class Tab4 extends Fragment implements View.OnClickListener {
 
     private Uri filePath;
 
+    private StorageReference storageReference;
+
 
     @Nullable
     @Override
@@ -48,6 +57,8 @@ public class Tab4 extends Fragment implements View.OnClickListener {
         rootView.setTag(TAG);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         editTextEventName = (EditText) rootView.findViewById(R.id.editTextEventName);
         editTextEventAddress = (EditText) rootView.findViewById(R.id.editTextEventAddress);
@@ -76,6 +87,42 @@ public class Tab4 extends Fragment implements View.OnClickListener {
 
         editTextEventName.getText().clear();
         editTextEventAddress.getText().clear();
+    }
+
+    private void uploadFile() {
+
+        if(filePath != null) {
+
+            //final ProgressDialog progressDialog = new ProgressDialog(getActivity().getApplicationContext());
+            //progressDialog.setTitle("Uploading...");
+            //progressDialog.show();
+
+            StorageReference riversRef = storageReference.child("images/event_image.jpg");
+
+            riversRef.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Toast.makeText(getActivity().getApplicationContext(), "Image enregistrée", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            //Toast.makeText(getActivity().getApplicationContext(), "Problème durant l'enregistrement de l'image", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0* taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                            //progressDialog.setMessage(((int) progress) + "% uploaded");
+                        }
+                    });
+            ;
+        }else {
+            // Display error Toast
+        }
     }
 
 
@@ -112,7 +159,8 @@ public class Tab4 extends Fragment implements View.OnClickListener {
         }
 
         if(view == buttonEventAdd){
-            addEvent();
+            //addEvent();
+            uploadFile();
         }
 
     }
