@@ -9,11 +9,13 @@ public class ListItem {
     private String head;
     private String desc;
     private String eventId;
+    private String imageUrl;
 
-    public ListItem(String head, String desc, String eventId) {
+    public ListItem(String head, String desc, String eventId, String imageUrl) {
         this.head = head;
         this.desc = desc;
         this.eventId = eventId;
+        this.imageUrl = imageUrl;
     }
 
     public String getDesc() {
@@ -26,5 +28,9 @@ public class ListItem {
 
     public String getEventId() {
         return eventId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

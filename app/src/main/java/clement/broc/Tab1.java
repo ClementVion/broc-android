@@ -72,7 +72,8 @@ public class Tab1 extends Fragment {
                     ListItem listItem = new ListItem(
                             event.getName(),
                             event.getAddress(),
-                            eventSnapshot.getKey()
+                            eventSnapshot.getKey(),
+                            event.getImageUrl()
                     );
 
                     listItems.add(listItem);
