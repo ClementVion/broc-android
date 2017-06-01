@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "798581604048-23ofr9annrq6beevkporp0f6prtfhl8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "clement.broc",
+            "certificate_hash": "abe40ed5545c0b075edcbe51f1c40f6bb7f80263"
+          }
+        },
+        {
           "client_id": "798581604048-2qg3rno6re7ma0lt2ko17u7tg7d9jjeg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798581604048-ibkokvike425t0ql9cr0abla7a7bqa0f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.broc"
+              }
+            },
+            {
+              "client_id": "798581604048-2qg3rno6re7ma0lt2ko17u7tg7d9jjeg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

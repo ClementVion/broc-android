@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayoutTab4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true">
 
@@ -36,6 +39,19 @@
             android:layout_height="wrap_content" />
 
         <Button
+            android:layout_weight="1"
+            android:id="@+id/buttonChoose"
+            android:text="Choose a photo"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
             android:layout_margin="15dp"
             android:id="@+id/buttonEventAdd"
             android:text="Ajouter"
@@ -45,7 +61,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium" />
 
-
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
