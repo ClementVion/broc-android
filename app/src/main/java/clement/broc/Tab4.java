@@ -1,16 +1,17 @@
 package clement.broc;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.text.format.DateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -48,8 +48,7 @@ public class Tab4 extends Fragment implements
     private EditText editTextEventName;
     private EditText editTextEventAddress;
     private Button buttonChoose;
-    private Button buttonDatePicker;
-    private TextView textViewDateChoosed;
+    private EditText buttonDatePicker;
     private Button buttonEventAdd;
     private ImageView imageView;
 
@@ -76,8 +75,7 @@ public class Tab4 extends Fragment implements
         editTextEventName = (EditText) rootView.findViewById(R.id.editTextEventName);
         editTextEventAddress = (EditText) rootView.findViewById(R.id.editTextEventAddress);
         buttonChoose = (Button) rootView.findViewById(R.id.buttonChoose);
-        buttonDatePicker = (Button) rootView.findViewById(R.id.buttonDatePicker);
-        textViewDateChoosed = (TextView) rootView.findViewById(R.id.textViewDateChoosed);
+        buttonDatePicker = (EditText) rootView.findViewById(R.id.buttonDatePicker);
         buttonEventAdd = (Button) rootView.findViewById(R.id.buttonEventAdd);
         imageView = (ImageView) rootView.findViewById(R.id.imageView);
 
@@ -93,28 +91,46 @@ public class Tab4 extends Fragment implements
         String name = editTextEventName.getText().toString().trim();
         String address = editTextEventAddress.getText().toString().trim();
 
+        // Datetime init
+        String dateTime = dayFinal + "/" + monthFinal + "/" + yearFinal  + " à " + hourFinal + "h" + minuteFinal;
+
+        // Transform url into string to fit the db
         String imageUrlString;
         imageUrlString = imageUrl.toString();
 
-        EventInformation eventInformation = new EventInformation(name, address, imageUrlString);
+        // Progress dialog
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Enregistrement de l'évènement...");
+        progressDialog.show();
 
+        // Create new model
+        EventInformation eventInformation = new EventInformation(name, address, imageUrlString, dateTime);
+
+        // Push to firebase db
         DatabaseReference postReference = databaseReference.child("events").push();
-
         postReference.setValue(eventInformation);
 
+        // Hide progress dialog
+        progressDialog.dismiss();
         Toast.makeText(getActivity(), "Evènement enregistré", Toast.LENGTH_LONG).show();
 
+        // Reset inputs
         editTextEventName.getText().clear();
         editTextEventAddress.getText().clear();
+        buttonDatePicker.getText().clear();
+
+        imageView.setImageDrawable(null);
+        imageView.setVisibility(View.GONE);
+        buttonChoose.setVisibility(View.VISIBLE);
     }
 
     private void uploadFile() {
 
         if(filePath != null) {
 
-            //final ProgressDialog progressDialog = new ProgressDialog(getActivity().getApplicationContext());
-            //progressDialog.setTitle("Uploading...");
-            //progressDialog.show();
+            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle("Enregistrement de l'image...");
+            progressDialog.show();
 
             StorageReference riversRef = storageReference.child("images/event_" + UUID.randomUUID().toString() + ".jpg");
 
@@ -122,10 +138,8 @@ public class Tab4 extends Fragment implements
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Toast.makeText(getActivity().getApplicationContext(), "Image enregistrée", Toast.LENGTH_LONG).show();
-
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
-
+                            progressDialog.dismiss();
                             addEvent(downloadUrl);
                         }
                     })
@@ -159,7 +173,8 @@ public class Tab4 extends Fragment implements
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
-                ((ViewGroup) buttonChoose.getParent()).removeView(buttonChoose);
+                imageView.setVisibility(View.VISIBLE);
+                buttonChoose.setVisibility(View.GONE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -213,6 +228,6 @@ public class Tab4 extends Fragment implements
         hourFinal = i;
         minuteFinal = i1;
 
-        textViewDateChoosed.setText(dayFinal + "/" + monthFinal + "/" + yearFinal  + " à " + hourFinal + "h" + minuteFinal);
+        buttonDatePicker.setText(dayFinal + "/" + monthFinal + "/" + yearFinal  + " à " + hourFinal + "h" + minuteFinal);
     }
 }

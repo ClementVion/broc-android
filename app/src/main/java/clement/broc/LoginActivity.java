@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(firebaseAuth.getCurrentUser() != null) {
             //start profile activity here
             finish();
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), NavActivity.class));
         }
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);

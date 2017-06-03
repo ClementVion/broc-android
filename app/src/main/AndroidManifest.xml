@@ -13,10 +13,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="Broc\'"></activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_main">
+            android:label="Broc\'">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +26,9 @@
         <activity android:name=".ProfileActivity" />
         <activity
             android:name=".NavActivity"
-            android:label="@string/title_activity_nav"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Broc\'"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".EventActivity"></activity>
     </application>
 
