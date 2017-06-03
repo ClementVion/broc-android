@@ -10,6 +10,7 @@ public class EventInformation {
     public String address;
     public String imageUrl;
 
+
     public EventInformation() {
 
     }

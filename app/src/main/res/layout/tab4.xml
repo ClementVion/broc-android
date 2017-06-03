@@ -41,10 +41,23 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/buttonChoose"
-            android:text="Choose a photo"
+            android:text="Ajouter une photo"
             android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/buttonDatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Ajouter une date"
+            android:onClick="showTimePickerDialog" />
+
+        <TextView
+            android:id="@+id/textViewDateChoosed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />Vi
 
         <ImageView
             android:id="@+id/imageView"

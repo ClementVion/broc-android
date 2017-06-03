@@ -42,14 +42,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.textViewHead.setText(listItem.getHead());
         holder.textViewDesc.setText(listItem.getDesc());
-        //holder.imageViewPicture.setText(listItem.getImageUrl());
-
-        //StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(listItem.getImageUrl());
-
-        //Glide.with(this /* context */)
-        //        .using(new FirebaseImageLoader())
-        //        .load(storageReference)
-        //        .into(holder.imageViewPicture);
 
         Picasso.with(context)
                 .load(listItem.getImageUrl())

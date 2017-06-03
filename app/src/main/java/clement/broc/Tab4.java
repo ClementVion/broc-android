@@ -1,7 +1,10 @@
 package clement.broc;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.text.format.DateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -34,12 +41,15 @@ import static com.google.android.gms.internal.zzs.TAG;
  * Created by clement on 28/05/2017.
  */
 
-public class Tab4 extends Fragment implements View.OnClickListener {
+public class Tab4 extends Fragment implements
+        View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     public static final int PICK_IMAGE_REQUEST = 234;
     private EditText editTextEventName;
     private EditText editTextEventAddress;
     private Button buttonChoose;
+    private Button buttonDatePicker;
+    private TextView textViewDateChoosed;
     private Button buttonEventAdd;
     private ImageView imageView;
 
@@ -48,6 +58,9 @@ public class Tab4 extends Fragment implements View.OnClickListener {
     private Uri filePath;
 
     private StorageReference storageReference;
+
+    int day, month, year, hour, minute;
+    int dayFinal, monthFinal, yearFinal, hourFinal, minuteFinal;
 
 
     @Nullable
@@ -63,10 +76,13 @@ public class Tab4 extends Fragment implements View.OnClickListener {
         editTextEventName = (EditText) rootView.findViewById(R.id.editTextEventName);
         editTextEventAddress = (EditText) rootView.findViewById(R.id.editTextEventAddress);
         buttonChoose = (Button) rootView.findViewById(R.id.buttonChoose);
+        buttonDatePicker = (Button) rootView.findViewById(R.id.buttonDatePicker);
+        textViewDateChoosed = (TextView) rootView.findViewById(R.id.textViewDateChoosed);
         buttonEventAdd = (Button) rootView.findViewById(R.id.buttonEventAdd);
         imageView = (ImageView) rootView.findViewById(R.id.imageView);
 
         buttonChoose.setOnClickListener(this);
+        buttonDatePicker.setOnClickListener(this);
         buttonEventAdd.setOnClickListener(this);
 
         return rootView;
@@ -120,7 +136,7 @@ public class Tab4 extends Fragment implements View.OnClickListener {
                         }
                     });
         }else {
-            // Display error Toast or direcly launch addEvent()
+            addEvent(null);
         }
     }
 
@@ -157,10 +173,46 @@ public class Tab4 extends Fragment implements View.OnClickListener {
             showFileChooser();
         }
 
+        if(view == buttonDatePicker){
+            chooseDate();
+        }
+
         if(view == buttonEventAdd){
             //addEvent();
             uploadFile();
         }
 
+    }
+
+    private void chooseDate() {
+        Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)this, year, month, day);
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        yearFinal = i;
+        monthFinal = i1 + 1;
+        dayFinal = i2;
+
+        Calendar c = Calendar.getInstance();
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener)this, hour, minute, DateFormat.is24HourFormat(getActivity()));
+        timePickerDialog.show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+        hourFinal = i;
+        minuteFinal = i1;
+
+        textViewDateChoosed.setText(dayFinal + "/" + monthFinal + "/" + yearFinal  + " à " + hourFinal + "h" + minuteFinal);
     }
 }
