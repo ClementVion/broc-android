@@ -48,15 +48,6 @@ public class Tab1 extends Fragment {
 
         listItems = new ArrayList<>();
 
-        /*for(int i = 0; i<=10; i++){
-            ListItem listItem = new ListItem(
-                    "heading" + (i+1),
-                    "Lorem ipsum coucou"
-            );
-
-            listItems.add(listItem);
-        }*/
-
         // Retrieve data from Firebase
         databaseEvents.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,8 +57,6 @@ public class Tab1 extends Fragment {
 
                 for(DataSnapshot eventSnapshot : dataSnapshot.getChildren()){
                     EventInformation event = eventSnapshot.getValue(EventInformation.class);
-                    //System.out.println(event.getName() + " - " + event.getAddress());
-                    //System.out.println("Id : " + eventSnapshot.getKey());
 
                     ListItem listItem = new ListItem(
                             event.getName(),

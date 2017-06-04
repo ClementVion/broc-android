@@ -60,13 +60,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Checking if email and password are empty
         if(TextUtils.isEmpty(email)) {
             // email is empty
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Entrez un email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)) {
             // password is empty
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Entrez un mot de passe", Toast.LENGTH_SHORT).show();
             return;
         }
         // If validations are ok we will show a progress dialog
