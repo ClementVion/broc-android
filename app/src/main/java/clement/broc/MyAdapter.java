@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public MyAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
+        Collections.reverse(this.listItems);
         this.context = context;
     }
 

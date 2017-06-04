@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:fillViewport="false">
 
     <LinearLayout
@@ -13,6 +15,15 @@
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true">
 
+        <ImageView
+            android:layout_margin="15dp"
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/image_broc" />
+
         <Button
             android:layout_weight="1"
             android:id="@+id/buttonChoose"
@@ -20,29 +31,28 @@
             android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="#FFF" />
-
-        <ImageView
-            android:layout_margin="15dp"
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:visibility="gone"/>
+            android:background="@color/colorWhite"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:textColor="@color/colorText" />
 
         <EditText
             android:layout_margin="15dp"
             android:hint="Nom"
             android:id="@+id/editTextEventName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorTextSecond"
+            android:textColor="@color/colorText"/>
 
         <EditText
             android:layout_margin="15dp"
             android:hint="Où ?"
             android:id="@+id/editTextEventAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorTextSecond"
+            android:textColor="@color/colorText"/>
 
         <EditText
             android:id="@+id/buttonDatePicker"
@@ -52,7 +62,9 @@
             android:inputType="none"
             android:textIsSelectable="true"
             android:hint="Quand ?"
-            android:onClick="showTimePickerDialog" />
+            android:onClick="showTimePickerDialog"
+            android:textColorHint="@color/colorTextSecond"
+            android:textColor="@color/colorText"/>
 
         <Button
             android:layout_margin="15dp"
