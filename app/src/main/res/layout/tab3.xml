@@ -2,11 +2,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:text="Tab3"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/profileEmail"
+            android:text="Email"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="24sp" />
+
+        <TextView
+            android:text="Account settings"
+            android:padding="10dp"
+            android:layout_marginTop="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFF"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textAlignment="textStart"
+            android:layout_gravity="start"
+            android:drawableLeft="@drawable/settings"
+            android:drawablePadding="15dp" />
+
+        <TextView
+            android:text="E-mail settings"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFF"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textAlignment="textStart"
+            android:layout_gravity="start"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="15dp" />
+
+        <TextView
+            android:text="See all past events"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFF"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textAlignment="textStart"
+            android:layout_gravity="start"
+            android:drawableLeft="@drawable/pasts"
+            android:drawablePadding="15dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>
