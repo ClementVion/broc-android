@@ -8,7 +8,7 @@
 
     <color name="colorText">#171717</color>
     <color name="colorTextSecond">#D6D6D6</color>
-    <color name="colorTextThird">#AFAFAF</color>
+    <color name="colorTextThird">#afafaf</color>
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_300">#E0E0E0</color>
 </resources>

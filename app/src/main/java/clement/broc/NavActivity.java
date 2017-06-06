@@ -166,7 +166,7 @@ public class NavActivity extends AppCompatActivity {
                 case 0:
                     return "BROC'S";
                 case 1:
-                    return "FAVORIS";
+                    return "PREVUS";
                 case 2:
                     return "PROFIL";
                 case 3:
