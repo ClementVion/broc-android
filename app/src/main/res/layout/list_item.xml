@@ -37,8 +37,13 @@
                 android:id="@+id/textViewDesc"
                 android:textColor="@color/colorTextThird"
                 android:text="Description"
+                android:drawableLeft="@drawable/location"
+                android:drawablePadding="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="textStart"
+                android:layout_gravity="start"/>
             
         </LinearLayout>
         
