@@ -23,7 +23,8 @@
             android:textSize="24sp" />
 
         <TextView
-            android:text="Account settings"
+            android:id="@+id/profileSettingsAccount"
+            android:text="Paramètres du compte"
             android:padding="10dp"
             android:layout_marginTop="35dp"
             android:layout_width="match_parent"
@@ -37,7 +38,8 @@
             android:drawablePadding="15dp" />
 
         <TextView
-            android:text="E-mail settings"
+            android:id="@+id/profileSettingsEmail"
+            android:text="E-mail"
             android:padding="10dp"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
@@ -51,7 +53,8 @@
             android:drawablePadding="15dp" />
 
         <TextView
-            android:text="See all past events"
+            android:id="@+id/profileSettingsEvents"
+            android:text="Voir les évènements passés"
             android:padding="10dp"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
